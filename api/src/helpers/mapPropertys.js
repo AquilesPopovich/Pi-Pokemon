@@ -24,7 +24,8 @@ const mapProperys = (data) =>{
     def,
     spAtk,
     spDef,
-    spd
+    spd,
+    types: types.map((type) => ({name: type.type.name})),
     }
 }
 

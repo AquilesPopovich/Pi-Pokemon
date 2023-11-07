@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const getAllPokemons = require('../handlers/getAllPokemons')
+const getTypes = require('../handlers/getTypes')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -11,13 +12,13 @@ const getAllPokemons = require('../handlers/getAllPokemons')
 
 router.get('/pokemons', getAllPokemons)
 
-router.get(' /pokemons/:idPokemon')
+router.get('/pokemons/name')
 
-router.get(' /pokemons/name?="..."')
+router.get('/pokemons/:idPokemon')
 
 router.post('/pokemons')
 
-router.get('/types')
+router.get('/types', getTypes)
 
 
 
