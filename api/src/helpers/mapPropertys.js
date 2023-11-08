@@ -1,6 +1,21 @@
 const mapProperys = (data) =>{
     const { id, name, weight, height, stats, sprites, types } = data;
 
+    let sprite;
+
+    if (
+        sprites.versions["generation-v"]["black-white"].animated.front_default !==
+        null
+      ) {
+        sprite =
+          sprites.versions["generation-v"]["black-white"].animated.front_default;
+      } else if (sprites.other["official-artwork"].front_default !== null) {
+        sprite = sprites.other["official-artwork"].front_default;
+      } else {
+        sprite =
+          "https://archives.bulbagarden.net/media/upload/6/62/Ghost_I_purple.png";
+      }
+
     const mapStats = {};
 
     for(const stat of stats){
@@ -17,6 +32,7 @@ const mapProperys = (data) =>{
     return{
     id,
     name,
+    sprite,
     weight,
     height,
     hp,

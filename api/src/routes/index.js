@@ -15,7 +15,7 @@ const postPokemons = require('../handlers/postPokemons')
 
 router.get('/pokemons', getAllPokemons)
 
-router.get('/pokemons/name', getPokemonByName)
+router.get('/name', getPokemonByName)
 
 router.get('/pokemons/:idPokemon', getPokemon)
 

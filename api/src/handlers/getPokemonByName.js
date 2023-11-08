@@ -1,26 +1,20 @@
 const mapProperys = require('../helpers/mapPropertys')
+const mapTypes = require('../helpers/mapTypes')
 const {getPokemonsByName} = require('../controllers/getInDb')
 const { default: axios } = require('axios')
 
 
 const getPokemonByName = async(req, res) =>{
     try {
-        const {value} = req.query
+        const {name} = req.query
     
-        const namePokemon = value.toLowerCase()
+        const namePokemon = name.toLowerCase()
 
         const pokemonsByDb = await getPokemonsByName(namePokemon)
 
-        try {
-            const {data} = await axios(`https://pokeapi.co/api/v2/pokemon/${namePokemon}`);
-            const pokemonsByApi = mapProperys(data)
-        } catch (error) {
-            throw new Error('not found by api')
-        }
 
-        const pokemonsTotales = [...pokemonsByDb.flat(),pokemonsByApi]
 
-        return res.status(200).json(pokemonsTotales);
+        return res.status(200).json(pokemonsByDb);
         
     } catch (error) {
         res.status(500).send(error.message);

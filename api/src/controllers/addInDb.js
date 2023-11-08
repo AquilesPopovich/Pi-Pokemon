@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { Type, Pokemon } = require('../db');
 
 const addTypesInDb = async(data) =>{
@@ -25,17 +24,16 @@ const addTypesInDb = async(data) =>{
 
 const addPokemon = async (name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type) => {
     const nameLower = name.toLowerCase();
-
     if (!name || !sprites || !hp || !atk || !def || !spd || !spAtk || !spDef) {
         throw Error('Faltan datos');
     }
 
-    let newPokemon;
-    if (type.length >= 1 && type.length <= 2) {
+   
+    if (type.length > 0 && type.length <= 2) {
         const [pokemon, create] = await Pokemon.findOrCreate({
             where: { name: nameLower },
             defaults: {
-                name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type
+                name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight
             }
         });
         
@@ -43,13 +41,13 @@ const addPokemon = async (name, sprites, hp, atk, def, spd, spAtk, spDef, height
             const addTypes = await Type.findAll({
                 where: { name: type }
             });
-            await pokemon.addTypes(addTypes);
+         return await pokemon.addType(addTypes);
         }
 
-        newPokemon = pokemon;
+        return pokemon
     }
 
-    return newPokemon;
+   
 }
 
 
