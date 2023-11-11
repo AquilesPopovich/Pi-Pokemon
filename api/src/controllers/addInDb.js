@@ -24,7 +24,7 @@ const addTypesInDb = async(data) =>{
 
 const addPokemon = async (name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type) => {
     const nameLower = name.toLowerCase();
-    if (!name || !sprites || !hp || !atk || !def || !spd || !spAtk || !spDef) {
+    if (!name || !sprites || !hp || !atk || !def || !spAtk || !spDef) {
         throw Error('Faltan datos');
     }
 

@@ -1,0 +1,65 @@
+import { GET_POKEMON_BY_NAME, ALL_POKEMONS,GET_TYPES, FILTER, FILTER_BY_TYPE, ORDER_ALF, ORDER_ATK } from "./actions-type";
+import axios from 'axios'
+
+export const filter = (byDb) =>{
+    return{
+        type: FILTER,
+        payload: byDb
+    }
+}
+
+export const filterByType = (typeId) =>{
+    return{
+        type: FILTER_BY_TYPE,
+        payload: typeId
+    }
+}
+
+export const allPokemons = () =>{
+    const endpoint = 'http://localhost:3001/pokemons';
+    return async(dispatch) =>{
+        try {
+            const {data} = await axios(endpoint)
+
+            return(dispatch)({
+                type: ALL_POKEMONS,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error.message);
+        }
+        
+    }
+}
+
+export const getPokemonByName = (name) =>{
+    const endpoint = `http://localhost:3001/name?name=${name}`
+    return async(dispatch)=>{
+        try {
+            const {data} = await axios(endpoint);
+
+            return(dispatch)({
+                type: GET_POKEMON_BY_NAME,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
+
+export const getTypes = () =>{
+    const endpoint = 'http://localhost:3001/types';
+    return async(dispatch)=>{
+        try {
+            const {data} = axios(endpoint)
+
+            return(dispatch)({
+                type: GET_TYPES,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
