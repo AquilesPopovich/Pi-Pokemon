@@ -1,22 +1,48 @@
-import Card from '../card/Card'
-import Loading from '../loading/Loading'
+import React, { useState } from 'react';
+import Card from '../card/Card';
+import Loading from '../loading/Loading';
+import style from './cards.module.css';
+import Pagination from '../pagination/Pagination'; 
 
 const Cards = ({ isLoading, pokemons }) => {
-    if (isLoading) {
-      return <Loading />;
-    }
+  const [currentPage, setCurrentPage] = useState(1);
+
   
-    return (
-      <div>
-        {pokemons.map(({ id, name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type }, index) => {
-          return name && id ? (
-            <div key={index}>
-              <Card id={id} name={name} sprites={sprites} hp={hp} atk={atk} def={def} spd={spd} spAtk={spAtk} spDef={spDef} height={height} weight={weight} type={type} />
-            </div>
-          ) : null;
-        })}
-      </div>
-    );
-  }
+  const itemsPerPage = 12;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedPokemons = Array.isArray(pokemons)
+    ? pokemons.slice(startIndex, endIndex)
+    : [pokemons];
+
+    console.log(pokemons.type)
+  return (
+    <div className={style.container}>
+      
+
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className={style.cards}>
+            {displayedPokemons.map(({ id, name, sprite, type }, index) => (
+              <div key={index} className={style.card}>
+                <Card id={id} name={name} sprite={sprite} type={type} />
+              </div>
+            ))}
+          </div>
+
+          
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalItems={Array.isArray(pokemons) ? pokemons.length : 1}
+          />
+        </>
+      )}
+    </div>
+  );
   
-  export default Cards;
+};
+
+export default Cards;

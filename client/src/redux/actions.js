@@ -1,5 +1,19 @@
-import { GET_POKEMON_BY_NAME, ALL_POKEMONS,GET_TYPES, FILTER, FILTER_BY_TYPE, ORDER_ALF, ORDER_ATK } from "./actions-type";
-import axios from 'axios'
+import { GET_POKEMON_BY_NAME, ALL_POKEMONS,GET_TYPES, FILTER, FILTER_BY_TYPE, ORDER_ALF, ORDER_ATK, GET_POKEMON_BY_ID } from "./actions-type";
+import axios from 'axios';
+
+export const orderAlf = ( payload) =>{
+    return{
+        type: ORDER_ALF,
+        payload: payload
+    }
+}
+
+export const orderAtk = (payload) =>{
+    return{
+        type: ORDER_ATK,
+        payload: payload
+    }
+}
 
 export const filter = (byDb) =>{
     return{
@@ -48,11 +62,27 @@ export const getPokemonByName = (name) =>{
     }
 }
 
+export const pokemonByID = (id) =>{
+    const endpoint = `http://localhost:3001/pokemons/${id}`
+    return async(dispatch)=>{
+        try {
+            const {data} = await axios(endpoint)
+
+            return (dispatch)({ 
+                type: GET_POKEMON_BY_ID,
+                payload: data
+        })
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+}
+
 export const getTypes = () =>{
     const endpoint = 'http://localhost:3001/types';
     return async(dispatch)=>{
         try {
-            const {data} = axios(endpoint)
+            const {data} = await axios(endpoint)
 
             return(dispatch)({
                 type: GET_TYPES,

@@ -1,50 +1,54 @@
 import { Route, Routes, useLocation} from 'react-router-dom'
 import { useState, useEffect} from 'react';
 import Landing from './components/landing/Landing';
-import Cards from './components/cards/Cards';
+import Home from './components/home/Home';
 import Nav from './components/Nav/Nav';
 import Detail from './components/detail/Detail';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypes, allPokemons, getPokemonByName } from './redux/actions';
+import style from './App.css'
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false)
-  const pokemons = useSelector((state)=>state.allPokemons)
+  const [isLoading, setIsLoading] = useState(true)
+  let pokemons = useSelector((state)=>state.allPokemonsCopy)
 
 
-  const onSearch = async (name) => {
-    try {
-      await dispatch(getPokemonByName(name));
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        console.error(`No se encontró el recurso para el nombre: ${name}`);
-      } else {
-        console.error(`Error desconocido: ${error.message}`);
-      }
-    }
+  const onSearch = (name) => {
+    
+      dispatch(getPokemonByName(name));
+    
   };
 
-  console.log(pokemons)
+  
 
   useEffect(() =>{
     dispatch(getTypes());
     dispatch(allPokemons())
+    .then(()=>{
+      setIsLoading(false)
+    })
+    .catch((error) => {
+      console.error(error);
+      setIsLoading(false);
+    })
   }, [dispatch])
+
+ 
 
 
 
   return (
-    <div>
+    <div className={style.container}>
       {
             location.pathname !== '/'  && <Nav onSearch={onSearch} /> 
          }
        <Routes>
           <Route path='/' element={<Landing/>} />
-          <Route path='/home' element={<Cards isLoading={isLoading} pokemons={pokemons} />} />
+          <Route path='/home' element={<Home isLoading={isLoading} pokemons={pokemons} />} />
           <Route path='/form' />
-          <Route path='/detail/:id' element={<Detail/>} />
+          <Route path='/detail/:id' element={<Detail setIsLoading={setIsLoading} isLoading={isLoading} />} />
 
        </Routes>
     </div>

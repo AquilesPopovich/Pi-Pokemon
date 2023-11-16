@@ -1,7 +1,6 @@
-const mapProperys = require('../helpers/mapPropertys')
-const mapTypes = require('../helpers/mapTypes')
+
 const {getPokemonsByName} = require('../controllers/getInDb')
-const { default: axios } = require('axios')
+
 
 
 const getPokemonByName = async(req, res) =>{
@@ -12,12 +11,15 @@ const getPokemonByName = async(req, res) =>{
 
         const pokemonsByDb = await getPokemonsByName(namePokemon)
 
+        
 
-
-        return res.status(200).json(pokemonsByDb);
+        if (pokemonsByDb) {
+            return res.status(200).json(pokemonsByDb);
+        }
         
     } catch (error) {
-        res.status(500).send(error.message);
+        console.error('Error al obtener Pokémon por nombre:', error);
+        res.status(500).send(`Error al obtener Pokémon por nombre: ${error.message}`);
     }
 }
 

@@ -1,22 +1,28 @@
-const Card = ({id, name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type}) =>{
-    return(
-        <div>
-            <img src={sprites} alt={`${name} sprite`} />
-            <h2>{name}</h2>
-            <p>ID: {id}</p>
-            <p>Type: {type}</p>
-            <div>
-                <p>HP: {hp}</p>
-                <p>Attack: {atk}</p>
-                <p>Defense: {def}</p>
-                <p>Speed: {spd}</p>
-                <p>Special Attack: {spAtk}</p>
-                <p>Special Defense: {spDef}</p>
-            </div>
-            <p>Height: {height} m</p>
-            <p>Weight: {weight} kg</p>
-        </div>
-    )
-}
+import { Link } from "react-router-dom";
 
-export default Card
+const Card = ({ id, name, sprite, type }) => {
+  console.log(type)
+    const typeElements = type?.map((typ) => (
+        <div key={typ.name} >
+          <img src={`/assets/icons/${typ.name.toLowerCase()}.svg`} alt={typ.name}  />
+        </div>
+      ));
+
+  return (
+    <div>
+      <Link to={`/detail/${id}`}>
+        <div>
+          <img src={`${sprite}`} alt={`${name} sprite`} />
+          <h2>{name}</h2>
+
+          <div>
+            <p>Type: {typeElements} </p>
+            
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
+export default Card;
