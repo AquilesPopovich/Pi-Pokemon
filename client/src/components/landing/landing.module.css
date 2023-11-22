@@ -1,15 +1,40 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url('../../../public/assets/imgs/fondoLanding.png');
-    background-size: cover; 
-    position: fixed;
-    background-position: center center; 
-    background-repeat: no-repeat; 
-    width: 100vw;
-    margin: 0 auto;
-    height: 100vh;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  background-image: url('../../../public/assets/imgs/fondoLanding.png');
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
+}
+
+.imgLanding {
+  max-width: 50%; 
+  height: auto;
+  transition: transform 0.5s ease;
+}
+.imgLanding:hover{
+  transform: scale(1.2);
+}
+
+.btnLanding {
+  margin-top: 40px;
   
-  }
+  padding: 25px 60px;
+  background-color: orange;
+  color: brown;
+  border: 3px solid brown;
+  border-radius: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btnLanding:hover {
+  transform: scale(1.2);
+}
+
+

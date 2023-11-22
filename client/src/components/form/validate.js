@@ -21,11 +21,11 @@ const validate = (data) => {
 
     // Validaciones para image
     if (data.sprite.trim().length === 0) {
-        errors.sprite = 'Image cannot be an empty field'
-    } else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(data.sprite)) {
-        errors.sprite = 'The image must be a URL'
-    }
-
+        errors.sprite = 'La imagen no puede estar vacía';
+      } else if (!/\.(jpeg|jpg|png|gif|webp|bmp|svg)$/i.test(data.sprite)) {
+        errors.sprite = 'La imagen debe ser una URL de formato válido (JPEG, JPG, PNG, GIF, WEBP, BMP, SVG)';
+      }
+      
     // Validaciones para hp
     if (data.hp.trim().length === 0) {
         errors.hp = 'HP cannot be an empty field'

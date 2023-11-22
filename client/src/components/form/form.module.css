@@ -1,7 +1,21 @@
 
-.formContainer {
+  .container{
+    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-image: url('../../../public/assets/imgs/posibleFondoPokemons3.jpg');
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    min-height: 94.2vh; 
+  }
+
+  .formContainer{
+    background-color: orange;
+    padding: 15px;
+    border: 1px solid brown;
+    border-radius: 8px;
   }
   
   .formArticle {
@@ -16,16 +30,24 @@
   }
   
   .formLabel {
-    margin-bottom: 8px;
     font-size: 16px;
+    padding: 12px 0;
   }
   
-  .formInput,
+  .typesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .formCheckboxLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
   .formCheckbox {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
+    margin-right: 5px;
   }
   
   .formButton {

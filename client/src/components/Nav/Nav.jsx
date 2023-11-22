@@ -12,8 +12,9 @@ const Nav = ({ onSearch }) => {
         <Link to="/home" className={styles.btnHome}></Link>
         <SearchBar onSearch={onSearch} />
         <Link to="/form" className={styles.btnCrear}></Link>
-        <Link to="/" className={styles.btnLanding}></Link>
         {location.pathname === '/home' && <Filters/>}
+        <Link to="/" className={styles.btnLanding}></Link>
+        
       </div>
     </div>
   );
