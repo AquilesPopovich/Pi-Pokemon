@@ -20,6 +20,7 @@
 }
 
 .card {
+  z-index: 0;
   border: 1px solid black;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   margin: 10px;

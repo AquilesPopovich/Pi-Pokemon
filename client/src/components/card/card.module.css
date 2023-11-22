@@ -155,4 +155,16 @@
   .card-container a:hover {
     text-decoration: underline;
   }
+  .btnX{
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    left: 18.5rem;
+    top: -.5rem;
+    
+  }
+
+  .btnX:hover{
+    cursor: pointer;
+  }
   

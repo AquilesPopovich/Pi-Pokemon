@@ -22,7 +22,7 @@ const getAllDbPokemons = async () => {
         pokemonStats,
         pokemonSprite,
         pokemonTypes,
-        pokemonCreated: true,
+        
       }
       return pokemonData;
     })
@@ -37,7 +37,7 @@ const getAllDbPokemons = async () => {
 const getPokemonById = async(idPokemon)=>{
     
   
-    if(isNaN(idPokemon)){ 
+    if(isNaN(idPokemon)){ //el id no es un num
     return await Pokemon.findOne({
       where: { id: idPokemon },
       include: {
@@ -74,10 +74,10 @@ const getAllPokemonsByDb = async() =>{
         }
       }
     })
-    console.log(dbPokemons)
+    
     return dbPokemons
   } catch (error) {
-    
+    console.log(error.message)
   }
 }
 

@@ -14,7 +14,7 @@ export const setCurrentPage = (payload) =>{
     }
 }
 
-export const cleanPokemonByName = () =>{
+export const cleanPokemonByName = (id) =>{
     return{
         type: CLEAN_POKEMON_BY_NAME
     }

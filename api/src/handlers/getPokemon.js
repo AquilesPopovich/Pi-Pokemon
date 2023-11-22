@@ -1,5 +1,4 @@
 const axios = require('axios');
-const mapProperys = require('../helpers/mapPropertys');
 const {getPokemonById} = require('../controllers/getInDb');
 
 const getPokemon = async(req, res) =>{

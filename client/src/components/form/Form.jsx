@@ -77,31 +77,31 @@ const FormCreate = ({newPokemon}) => {
                         {errors.hp !== null && <p>{errors.hp}</p>}
 
                         <label  className={style.formLabel} >Attack:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.atk} name='atk' className={style.formInput}  onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 5' type="text" value={inputData.atk} name='atk' className={style.formInput}  onChange={handleChange} />
                         {errors.atk !== null  && <p>{errors.attack}</p>}
 
                         <label className={style.formLabel} >Special Attack:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.spAtk} className={style.formInput}  name='spAtk' onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 5' type="text" value={inputData.spAtk} className={style.formInput}  name='spAtk' onChange={handleChange} />
                         {errors.spAtk && <p>{errors.spAtk}</p>}
 
                         <label  className={style.formLabel}>Defense:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.def} className={style.formInput}  name='def' onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 5' type="text" value={inputData.def} className={style.formInput}  name='def' onChange={handleChange} />
                         {errors.def !== null && <p>{errors.def}</p>}
 
                         <label   className={style.formLabel}>Special Defense:</label>
-                        <input  placeholder='minimun attribute value: 100'type="text" value={inputData.spDef} className={style.formInput}  name='spDef' onChange={handleChange} />
+                        <input  placeholder='minimun attribute value: 5'type="text" value={inputData.spDef} className={style.formInput}  name='spDef' onChange={handleChange} />
                         {errors.spDef !== null && <p>{errors.spDef}</p>}
 
                         <label   className={style.formLabel}>Speed:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.spd} className={style.formInput}  name='spd' onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 10' type="text" value={inputData.spd} className={style.formInput}  name='spd' onChange={handleChange} />
                         {errors.spd !== null && <p>{errors.speed}</p>}
 
                         <label  className={style.formLabel}>Height:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.height} className={style.formInput}  name='height' onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 1' type="text" value={inputData.height} className={style.formInput}  name='height' onChange={handleChange} />
                         {errors.height !== null && <p>{errors.height}</p>}
 
                         <label  className={style.formLabel}>Weight:</label>
-                        <input placeholder='minimun attribute value: 100' type="text" value={inputData.weight} className={style.formInput}  name='weight' onChange={handleChange} />
+                        <input placeholder='minimun attribute value: 1' type="text" value={inputData.weight} className={style.formInput}  name='weight' onChange={handleChange} />
                         {errors.weight !== null && <p>{errors.weight}</p>}
                         
                         <span>Types:</span>

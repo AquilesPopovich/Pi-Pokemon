@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useParams} from 'react-router-dom'
+import { Route, Routes, useLocation} from 'react-router-dom'
 import { useState, useEffect} from 'react';
 import Landing from './components/landing/Landing';
 import Form from './components/form/Form';
@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTypes, allPokemons, getPokemonByName } from './redux/actions';
 import style from './App.css'
 import axios from 'axios';
-import Loading from './components/loading/Loading';
 
 function App() {
   const location = useLocation();
@@ -25,7 +24,6 @@ function App() {
   };
 
   const newPokemon= async(pokemon) =>{
-    console.log(pokemon)
     const url = 'http://localhost:3001/pokemons'
     try {
        const response = await axios.post(url, pokemon)

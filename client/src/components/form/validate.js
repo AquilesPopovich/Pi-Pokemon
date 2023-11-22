@@ -15,7 +15,7 @@ const validate = (data) => {
     // Validaciones para name
     if (data.name.trim().length === 0) {
         errors.name = 'Name cannot be an empty field';
-    } else if (data.name.length > 20) {
+    } else if (data.name.length > 49) {
         errors.name = 'The name cannot be more than 20 characters';
     }
 

@@ -15,6 +15,8 @@ const Cards = ({ isLoading, pokemons }) => {
     ? pokemons.slice(startIndex, endIndex)
     : [pokemons];
 
+  
+
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -25,6 +27,7 @@ const Cards = ({ isLoading, pokemons }) => {
           <div className={styles.cards}>
             {displayedPokemons.map(({ id, name, sprite, types, Types }, index) => (
               <div key={index} className={styles.card}>
+                
                 <Card id={id} name={name} sprite={sprite} types={types ? types : Types} />
               </div>
             ))}

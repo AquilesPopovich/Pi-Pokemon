@@ -1,12 +1,9 @@
 const mapProperys = (data) =>{
-    const { id, name, weight, height, stats, sprites, types, createInDb } = data;
+    const { id, name, weight, height, stats, sprites, types } = data;
 
     let sprite;
 
-    if (
-        sprites.versions["generation-v"]["black-white"].animated.front_default !==
-        null
-      ) {
+    if (sprites.versions["generation-v"]["black-white"].animated.front_default !==null) {
         sprite =
           sprites.versions["generation-v"]["black-white"].animated.front_default;
       } else if (sprites.other["official-artwork"].front_default !== null) {
@@ -29,23 +26,7 @@ const mapProperys = (data) =>{
     const spDef = mapStats["special-defense"];
     const spd = mapStats["speed"];
 
-    if(createInDb === true){
-      return{
-        id,
-        name,
-        sprite,
-        weight,
-        height,
-        hp,
-        atk,
-        def,
-        spAtk,
-        spDef,
-        spd,
-        createInDb,
-        types: data.types.map((type) => ({ name: type.type.name }))
-        }
-    }
+    
 
     return{
     id,
@@ -59,7 +40,6 @@ const mapProperys = (data) =>{
     spAtk,
     spDef,
     spd,
-    createInDb,
     types: types.map((type) => ({name: type.type.name})),
     }
 }
