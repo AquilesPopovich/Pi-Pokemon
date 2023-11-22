@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../../public/assets/imgs/fondoLanding.png');
+    background-size: cover; 
+    position: fixed;
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    width: 100vw;
+    margin: 0 auto;
+    height: 100vh;
+    text-align: center;
+  
+  }

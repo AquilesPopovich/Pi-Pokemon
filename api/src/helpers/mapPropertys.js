@@ -1,5 +1,5 @@
 const mapProperys = (data) =>{
-    const { id, name, weight, height, stats, sprites, types } = data;
+    const { id, name, weight, height, stats, sprites, types, createInDb } = data;
 
     let sprite;
 
@@ -29,6 +29,24 @@ const mapProperys = (data) =>{
     const spDef = mapStats["special-defense"];
     const spd = mapStats["speed"];
 
+    if(createInDb === true){
+      return{
+        id,
+        name,
+        sprite,
+        weight,
+        height,
+        hp,
+        atk,
+        def,
+        spAtk,
+        spDef,
+        spd,
+        createInDb,
+        types: data.types.map((type) => ({ name: type.type.name }))
+        }
+    }
+
     return{
     id,
     name,
@@ -41,6 +59,7 @@ const mapProperys = (data) =>{
     spAtk,
     spDef,
     spd,
+    createInDb,
     types: types.map((type) => ({name: type.type.name})),
     }
 }

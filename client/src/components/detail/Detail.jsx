@@ -1,16 +1,23 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Loading from "../loading/Loading";
 import {pokemonByID} from '../../redux/actions'
+import styles from "./detail.module.css";
 
 
 const Detail = ({isLoading, setIsLoading}) =>{
     const {id} = useParams()
     const pokemonById = useSelector((state)=> state.pokemonByID )
+    console.log(pokemonById)
     const dispatch = useDispatch();
+     const typesPokemonId = pokemonById.types ?  pokemonById.types : pokemonById.types = pokemonById.Types
+    const typeElements = typesPokemonId?.map((type) => (
+      <div className={styles.containerImg} key={type.name}>
+        <img className={styles[type.name.toLowerCase()]} src={`/assets/icons/${type.name.toLowerCase()}.svg`} alt={type.name} />
+      </div>
+    ));
 
-    console.log('holi',pokemonByID)
     
 
     useEffect(() => {
@@ -35,58 +42,64 @@ const Detail = ({isLoading, setIsLoading}) =>{
     if (isLoading) {
         return <Loading />;
     }
-
-    return( 
-  <div>
-    <div>
-      <div>
-        
-        <div>
-          <img
-            src={pokemonById.sprite}
-            alt={pokemonById.name}
-            
-          />
+    console.log(pokemonById.sprites)
+    return (
+      <div className={styles["detail-container"]}>
+        <div className={styles["contentDetail"]}>
+          <div>
+            <img
+              className={styles.imgDetail}
+              src={pokemonById.sprite}
+              alt={pokemonById.name}
+            />
+          </div>
+          <div className={styles["detail-container-stats"]}>
+            <div className={styles.typesContainer}>
+            <h2>{pokemonById.name} </h2>
+            <div className={styles.typesContainer}>
+            {typeElements}
+            </div>
+            </div>
+            <div>
+              <div>
+                <span>ID:</span> {id}
+                
+              </div>
+              <h3>STATS:</h3>
+              <div className={styles.stats}>
+                <span>HP:</span> {pokemonById.hp}
+              </div>
+              <div className={styles.stats}>
+                <span>SPD:</span> {pokemonById.spd}
+              </div>
+              <div className={styles.stats}>
+                <span>ATK:</span> {pokemonById.atk}
+              </div>
+              <div className={styles.stats}>
+                <span>SP.ATK:</span> {pokemonById.spAtk}
+              </div>
+              <div className={styles.stats}>
+                <span>DEF:</span> {pokemonById.def}
+              </div>
+              <div className={styles.stats}>
+                <span>SP.DEF:</span> {pokemonById.spDef}
+              </div>
+              <div className={styles.stats}>
+                <span>Height: {pokemonById.height / 10}m</span>
+                
+              </div>
+              <div className={styles.stats}>
+                <span>Weight: {pokemonById.weight / 10}kg</span>
+                
+              </div>
+            </div>
+          </div>
+          <Link to={"/home"} className={styles.backButton}>
+            <button className={styles.customButton}></button>
+          </Link>
         </div>
-        <h2>{pokemonById.name}</h2>
-        <div>
-          <span>ID:</span> {id}
-        </div>
-        <div >
-          <div>
-            <span>HP:</span> {pokemonById.hp}
-          </div>
-          <div>
-            <span>SPD:</span> {pokemonById.spd}
-          </div>
-          <div>
-            <span>ATK:</span> {pokemonById.atk}
-          </div>
-          <div>
-            <span>SP.ATK:</span> {pokemonById.spAtk}
-          </div>
-          <div>
-            <span>DEF:</span> {pokemonById.def}
-          </div>
-          <div>
-            <span>SP.DEF:</span> {pokemonById.spDef}
-          </div>
-          <div>
-            <span>Height:</span>
-            <p>{pokemonById.height / 10}m</p>
-          </div>
-          <div>
-            <span>Weight:</span>
-            <p>{pokemonById.weight / 10}kg</p>
-          </div>
-        </div>
-        <span>Types:</span>
-        
       </div>
-    </div>
-            
-  </div>
-    )
+    );
 
 }
 

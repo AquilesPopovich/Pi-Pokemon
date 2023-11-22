@@ -1,11 +1,13 @@
+const {getAllPokemonsByDb, getAllDbPokemons} = require('../controllers/getInDb')
 const axios = require('axios');
 const mapPropertys = require('../helpers/mapPropertys')
+
 
 const getAllPokemons = async(req, res) =>{
     try {
         const URL = 'https://pokeapi.co/api/v2/pokemon'
 
-        const limit = 400;
+        const limit = 24;
 
         const {data} = await axios(`${URL}?limit=${limit}&offset=00`);
 
@@ -16,11 +18,26 @@ const getAllPokemons = async(req, res) =>{
 
             const character = mapPropertys(data);
 
+           
+
             return character;
+
             
         }))
+        const pokemonsByDb = await getAllPokemonsByDb()
+        let allPokemon = [ ...listPokemons,...pokemonsByDb];
 
-        res.status(200).json(listPokemons)
+        
+        const dbPokemons = await getAllDbPokemons()
+        
+        if(dbPokemons){
+            allPokemon = [ ...listPokemons,...dbPokemons];
+        }
+        
+        
+        res.status(200).json(allPokemon)
+        
+        return allPokemon
 
     } catch (error) {
         res.status(500).send(error.message);

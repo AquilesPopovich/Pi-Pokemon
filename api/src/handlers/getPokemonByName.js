@@ -19,7 +19,6 @@ const getPokemonByName = async(req, res) =>{
         
     } catch (error) {
         console.error('Error al obtener Pokémon por nombre:', error);
-        res.status(500).send(`Error al obtener Pokémon por nombre: ${error.message}`);
     }
 }
 

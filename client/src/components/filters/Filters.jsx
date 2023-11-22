@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByType, filter, orderAlf, orderAtk } from "../../redux/actions";
+import { filterByType, filter, orderAlf, orderAtk, setCurrentPage } from "../../redux/actions";
+import styles from "./filters.module.css";
 
 const Filters = () => {
   const types = useSelector((state) => state.pokemonsTypes);
@@ -8,17 +9,21 @@ const Filters = () => {
 
   const handleFiltersTypes = (event) => {
     dispatch(filterByType(event.target.value));
+    dispatch(setCurrentPage(1))
   };
 
   const handleFilters = (event) => {
     dispatch(filter(event.target.value));
+    dispatch(setCurrentPage(1))
   };
 
   const handleOrder = (event) => {
   if(event.target.value === "AtkAscendente" || event.target.value === "AtkDescendente"){
     dispatch(orderAtk(event.target.value));
+    dispatch(setCurrentPage(1))
   }else{
     dispatch(orderAlf(event.target.value));
+    dispatch(setCurrentPage(1))
   }
       
    
@@ -28,7 +33,7 @@ const Filters = () => {
 
   return (
     <div>
-      <div>
+      <div className={styles["filters-container"]}>
         <select onChange={handleFiltersTypes}>
           <option value="All" hidden>Types</option>
           <option value="All">All</option>
@@ -43,11 +48,9 @@ const Filters = () => {
         <select onChange={handleFilters}>
           <option value="All" hidden>Storage</option>
           <option value="AllPokemons">All Pokemons</option>
-          <option value="Stored">Exist</option>
-          <option value="Created">Create</option>
+          <option value="false">Exist</option>
+          <option value="true">Create</option>
         </select>
-      </div>
-      <div>
         <select onChange={handleOrder}>
           <option value="All" hidden>Orden</option>
           <option value="Ascendente">A-Z</option>

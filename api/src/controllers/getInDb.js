@@ -2,10 +2,41 @@ const {Pokemon, Type} = require('../db');
 const mapProperys = require('../helpers/mapPropertys')
 const axios = require('axios')
 
+const getAllDbPokemons = async () => {
+  try {
+    const dbPokemons = await Pokemon.findAll({
+      include: Type
+    });
+    const pokemonObject = dbPokemons.map((pokemon) => {
+      const pokemonId = pokemon.id;
+      const pokemonName = pokemon.name;
+      const pokemonStats = [pokemon.hp, pokemon.atk, pokemon.def, pokemon.spAtk, pokemon.spDef, pokemon.spd];
+      const pokemonSprite = {
+        front_default: pokemon.sprite,
+      }
+      const pokemonTypes = pokemon.types.map((type) => type.name)
+
+      const pokemonData ={
+        pokemonId,
+        pokemonName,
+        pokemonStats,
+        pokemonSprite,
+        pokemonTypes,
+        pokemonCreated: true,
+      }
+      return pokemonData;
+    })
+
+    return pokemonObject;
+  } catch (error) {
+    return null;
+  }
+};
+
 
 const getPokemonById = async(idPokemon)=>{
     
-  console.log(idPokemon)
+  
     if(isNaN(idPokemon)){ 
     return await Pokemon.findOne({
       where: { id: idPokemon },
@@ -30,6 +61,24 @@ const getPokemonById = async(idPokemon)=>{
   }
     
   
+}
+
+const getAllPokemonsByDb = async() =>{
+  try {
+    const dbPokemons = await Pokemon.findAll({
+     include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: []
+        }
+      }
+    })
+    console.log(dbPokemons)
+    return dbPokemons
+  } catch (error) {
+    
+  }
 }
 
 const getPokemonsByName = async(namePokemon) =>{
@@ -58,6 +107,7 @@ const getPokemonsByName = async(namePokemon) =>{
 module.exports = {
 
  getPokemonById,
- getPokemonsByName
-
+ getPokemonsByName,
+ getAllPokemonsByDb,
+  getAllDbPokemons
 }

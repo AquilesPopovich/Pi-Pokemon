@@ -1,18 +1,22 @@
-const {addPokemon} = require('../controllers/addInDb')
+const { addPokemon } = require('../controllers/addInDb');
 
 const postPokemons = async (req, res) => {
     try {
-        const { name, sprites, hp, atk, def, spAtk, spDef, spd, height, weight, type } = req.body;
-
-        const pokemon = await addPokemon(name, sprites, hp, atk, def, spd, spAtk, spDef, height, weight, type);
-
-        console.log(pokemon)
-        if (pokemon) {
-            return res.status(200).json(pokemon);
-        } 
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        const { name, sprite, hp, atk, def, spd, spAtk, spDef, height, weight, types } = req.body
+         if (!name || !sprite || !hp || !atk || !def || !spAtk || !spDef) {
+            throw new Error('Faltan datos')
+        }
+        else{
+            const lowerName = name.toLowerCase()
+            const newPokemon = await addPokemon(lowerName, sprite, hp, atk, def, spd, spAtk, spDef, height, weight, types)
+            if (newPokemon) {
+                res.status(200).json({message: 'Pokemon created sucefull'})
+            }
+        }
+    } 
+    catch (error) {
+        res.status(404).send(error.message)
     }
-}
+};
 
 module.exports = postPokemons;

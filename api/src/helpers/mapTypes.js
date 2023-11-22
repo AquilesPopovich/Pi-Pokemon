@@ -12,7 +12,6 @@ const mapTypes = (pokemon) => {
         spAtk: pokemon.spAtk,
         spDef: pokemon.spDef,
         spd: pokemon.spd,
-        cry: pokemon.cry,
         types: pokemon.Types.map((type) => ({name: type.name})),
       },
     ]

@@ -1,5 +1,24 @@
-import { GET_POKEMON_BY_NAME, ALL_POKEMONS,GET_TYPES, FILTER, FILTER_BY_TYPE, ORDER_ALF, ORDER_ATK, GET_POKEMON_BY_ID } from "./actions-type";
+import { GET_POKEMON_BY_NAME,CURRENT_PAGE,CLEAN_POKEMON_BY_NAME, CLEAN_POKEMON_BY_ID , ALL_POKEMONS,GET_TYPES, FILTER, FILTER_BY_TYPE, ORDER_ALF, ORDER_ATK, GET_POKEMON_BY_ID } from "./actions-type";
 import axios from 'axios';
+
+export const cleanPokemonById = () =>{
+    return{
+        type: CLEAN_POKEMON_BY_ID
+    }
+}
+
+export const setCurrentPage = (payload) =>{
+    return{
+        type: CURRENT_PAGE,
+        payload: payload
+    }
+}
+
+export const cleanPokemonByName = () =>{
+    return{
+        type: CLEAN_POKEMON_BY_NAME
+    }
+}
 
 export const orderAlf = ( payload) =>{
     return{
@@ -29,6 +48,7 @@ export const filterByType = (typeId) =>{
     }
 }
 
+
 export const allPokemons = () =>{
     const endpoint = 'http://localhost:3001/pokemons';
     return async(dispatch) =>{
@@ -45,6 +65,7 @@ export const allPokemons = () =>{
         
     }
 }
+
 
 export const getPokemonByName = (name) =>{
     const endpoint = `http://localhost:3001/name?name=${name}`
